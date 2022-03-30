@@ -1,0 +1,14 @@
+{
+  "name": "Movie",
+  "description": "",
+  "website": "",
+  "repository": "",
+  "logo": "",
+  "success_url": "/",
+  "keywords": [],
+  "scripts": {},
+  "addons": [],
+  "env": {
+    "BUILDPACK_URL": ""
+  }
+}
