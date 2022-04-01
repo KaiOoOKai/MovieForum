@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+<style>
+    .navbar-custom {
+        /* Code to change the color of the navbar
+            This small CSS code is referenced from https://uigradients.com*/
+        background: #e52d27;
+        background: -webkit-linear-gradient(to right, #b31217, #e52d27);
+        background: linear-gradient(to right, #b31217, #e52d27);
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="margin-right:35%">Movie Forum</a>
+        <form class="d-flex" action="/search">
+            <input class="form-control me-2" type="search" name="keyword" placeholder="Search For Book"
+                aria-label="Search For Book">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/signUp">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/adminLogin">Admin Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/adminLogin">Moderator Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script src="/js/bootstrap.min.js"></script>

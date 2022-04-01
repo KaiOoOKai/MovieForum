@@ -1,13 +1,26 @@
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
+const methodOverride = require('method-override')
+const path = require('path');
 
-// This is used for redirecting the index page to index.html. 
+const res = require('express/lib/response');
+const { request } = require('http');
+
+
+
+app.use(methodOverride('_method'))
+app.use(express.urlencoded({ extended: true })) //to parse HTML form data (aka read HTML form data)
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.json());
+
+app.set('view engine', 'ejs'); //using the ejs view engine, so we can do dynamic HTML templating.
+app.set('views', path.join(__dirname, '/views')); //Add this so that we can run our app from any directory.
+
+
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.render('index');
 });
 
-server.listen(3000, () => {
+const server = app.listen(3000, () => {
   console.log('listening on *:3000');
 });
