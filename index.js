@@ -21,6 +21,15 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/index', (req, res) => {
+  res.render('index');
+});
+
+// This allows the mysubs page to be reached whenever it is clicked on the navbar.
+app.get('/mysubs', (req, res) => {
+  res.render('mysubs');
+});
+
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
 });
