@@ -21,6 +21,15 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+//search
+app.get('/search', (req, res) => {
+  res.render('search', { keyword: req.query.keyword });
+});
+
+app.get('/api/movies', (req, res) => {
+
+});
+
 app.get('/index', (req, res) => {
   res.render('index');
 });

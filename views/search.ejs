@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('navbar.ejs') %>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Search Movies</title>
+
+</head>
+
+<body>
+    <h1>Movies</h1>
+
+    <!--<ul= id="myList"></ul>-->
+    <div class="container-fluid">
+        <div class="row" id="movieRow">
+        </div>
+        <style>
+            .card {
+                margin-top: 10px;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                margin-right: 10px;
+                max-height: 300px;
+                min-height: 200px;
+                transition: .1s;
+            }
+
+            .card-img-top {
+                width: 100%;
+                height: 100em;
+                object-fit: contain;
+            }
+
+            .card:hover {
+                box-shadow: 2px 2px 2px grey;
+                transform: scale(1.05);
+            }
+        </style>
+    </div>
+    <div id="message"></div>
+
+    <script>
+        const api_url = '/api/movies'
+        async function getmovies() {
+            const response = await fetch(api_url.concat(`?keyword=${'<%= keyword %>'}`));
+            const data = await response.json();
+            const list = document.getElementById("myList");
+            if (data.length == 0) {
+                document.getElementById("message").innerHTML = `No movies with keyword '${'<%= keyword %>'}'`;
+                return;
+            }
+            let movieRowBody = "";
+            data.forEach((item) => {
+                movieRowBody = movieRowBody + `<div class="card" style="width: 18rem;">
+          <img src="https://i.fbcd.co/products/resized/resized-750-500/ae2d64e634f5beaa6f0e867d529ece28f0504e9e24fc4d5e0d6fd21f0a05df7f.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${item.Name}</h5>
+            <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                Status: ${item.Status}
+                                            </li>
+                                            
+                                        </ul>
+            <a href=/api/moviedetail?ID=${item.ID}" class="stretched-link"></a>
+          </div>
+        </div>`;
+            });
+            document.getElementById("movieRow").innerHTML = movieRowBody;
+        }
+        console.log('<%= keyword %>');
+        getmovies();
+    </script>
+
+</body>
+
+</html>
