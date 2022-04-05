@@ -21,6 +21,23 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+//login
+app.get('/login', (req, res) => {
+  res.render('homeLogin');
+});
+
+//Home
+app.get('/home', (req, res) => {
+  res.render('home');
+});
+
+
+//Administrator
+app.get('/admin', (req, res) => {
+  res.render('admin');
+});
+
+
 //search
 app.get('/search', (req, res) => {
   res.render('search', { keyword: req.query.keyword });
