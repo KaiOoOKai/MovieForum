@@ -1,17 +1,20 @@
 [
     {
+        "threadId":"1",
         "threadTitle": "Harry Potter and the Sorcerer's Stone",
         "threadTime": "2022-04-01 11:53pm",
         "username": "kai",
         "postContent": "This is a good movie!!!!!"
     },
     {
+        "threadId":"2",
         "threadTitle": "Harry Potter and the Chamber of Secrets",
         "threadTime": "2022-04-02 11:53pm",
         "username": "kai",
         "postContent": "This is a good movie!!!!!"
     },
     {
+        "threadId":"3",
         "threadTitle": "Harry Potter and the Prisoner of Azkaban",
         "threadTime": "2022-04-03 11:53pm",
         "username": "kai",

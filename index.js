@@ -34,6 +34,11 @@ app.get('/home', (req, res) => {
   res.render('home');
 });
 
+//Thread
+app.get('/thread', (req, res) => {
+  res.render('thread');
+});
+
 
 //Administrator
 app.get('/admin', (req, res) => {
@@ -56,6 +61,11 @@ app.get('/api/movies', (req, res) => {
 
   res.json(results);
 
+});
+
+app.get('/api/getAllMovies', (req, res) => {
+  let results = threadData;
+  res.json(results);
 });
 
 app.get('/index', (req, res) => {
