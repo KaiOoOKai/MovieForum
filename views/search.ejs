@@ -7,11 +7,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Search Movies</title>
+        <script type="text/javascript" src="thread.json"></script>
+        <script>
 
+            var mydata = JSON.parse(data);
+            alert(mydata);
+        </script>
 </head>
 
 <body>
-    <h1>Movies</h1>
+    <h1>Search Result</h1>
 
     <!--<ul= id="myList"></ul>-->
     <div class="container-fluid">
@@ -54,15 +59,19 @@
             }
             let movieRowBody = "";
             data.forEach((item) => {
-                movieRowBody = movieRowBody + `<div class="card" style="width: 18rem;">
-          <img src="https://i.fbcd.co/products/resized/resized-750-500/ae2d64e634f5beaa6f0e867d529ece28f0504e9e24fc4d5e0d6fd21f0a05df7f.jpg" class="card-img-top" alt="...">
+                movieRowBody = movieRowBody + `<div class="card">
           <div class="card-body">
-            <h5 class="card-title">${item.Name}</h5>
+            <h5 class="card-title">${item.threadTitle}</h5>
             <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                                Status: ${item.Status}
+                                                Time: ${item.threadTime}
                                             </li>
-                                            
+                                               <li class="list-group-item">
+                                                User: ${item.username}
+                                            </li>
+                                               <li class="list-group-item">
+                                                Content: ${item.threadContent}
+                                            </li>
                                         </ul>
             <a href=/api/moviedetail?ID=${item.ID}" class="stretched-link"></a>
           </div>

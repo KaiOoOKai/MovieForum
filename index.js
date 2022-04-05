@@ -6,7 +6,10 @@ const path = require('path');
 const res = require('express/lib/response');
 const { request } = require('http');
 
+const fs = require('fs');
 
+let threadRaw = fs.readFileSync('thread.json');
+let threadData = JSON.parse(threadRaw);
 
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true })) //to parse HTML form data (aka read HTML form data)
@@ -44,6 +47,14 @@ app.get('/search', (req, res) => {
 });
 
 app.get('/api/movies', (req, res) => {
+  const keyword = req.query.keyword;
+
+
+  let results = threadData;
+
+
+
+  res.json(results);
 
 });
 
