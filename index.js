@@ -11,6 +11,9 @@ const fs = require('fs');
 let threadRaw = fs.readFileSync('thread.json');
 let threadData = JSON.parse(threadRaw);
 
+let userRaw = fs.readFileSync('user.json');
+let userData = JSON.parse(userRaw);
+
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true })) //to parse HTML form data (aka read HTML form data)
 app.use(express.static(path.join(__dirname, '/public')));
@@ -24,9 +27,19 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+//Sign Up
+app.get('/signUp', (req, res) => {
+  res.render('signUp');
+});
+
 //login
 app.get('/login', (req, res) => {
   res.render('homeLogin');
+});
+
+//Invalid Login
+app.get('/invalidLogin', (req, res) => {
+  res.render('invalidLogin');
 });
 
 //Home
@@ -66,6 +79,55 @@ app.get('/api/movies', (req, res) => {
 app.get('/api/getAllMovies', (req, res) => {
   let results = threadData;
   res.json(results);
+});
+
+app.post('/api/login', (req, res) => {
+  
+  let username =  req.body.username;
+  let password =  req.body.password;
+  let result = userData.filter(function (i,n){
+    return (n.username == username && n.password == password)
+  });
+
+  if(result.length == 0)
+  {
+    res.redirect('/invalidLogin');
+  }
+  else{
+    res.redirect('/');
+  }
+  console.log(username+" "+password);
+  let results = threadData;
+  res.json(results);
+});
+
+app.post('/api/removeUser', (req, res) => {
+  
+  let username =  req.body.username;
+  let password =  req.body.password;
+  let userData = userData.filter(function (i,n){
+    return !(n.username == username && n.password == password)
+  });
+  let json = JSON.stringify(userData);
+  fs.writeFile('user.json', json);
+  // Need to change
+  res.redirect('/');
+});
+
+app.post('/api/addUser', (req, res) => {
+  
+  let username =  req.body.username;
+  let password =  req.body.password;
+  let newUser =  {
+    "username":username,
+    "password":password
+}
+
+  userData.push(newUser);
+  let json = JSON.stringify(userData);
+  fs.writeFile('user.json', json);
+  // Need to change
+  res.redirect('/');
 });
 
 app.get('/index', (req, res) => {

@@ -1,0 +1,18 @@
+[
+    {
+        "username":"testadmin",
+        "password":"1234",
+        "type":"admin"
+
+    },
+    {
+        "username":"testmoderator",
+        "password":"1234",
+        "type":"moderator"
+    },
+    {
+        "username":"testuser",
+        "password":"1234",
+        "type":"user"
+    }
+]
