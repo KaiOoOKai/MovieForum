@@ -10,8 +10,42 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
+<script>
+  async function getAllMovies() {
+      const api_url = '/api/getAllMovies'
+      const response = await fetch(api_url);
+      const data = await response.json();
+      const list = document.getElementById("myList");
+      let movieRowBody = "";
+      data.forEach((item) => {
+          movieRowBody = movieRowBody + `<div class="card">
+          <div class="card-body">
+              <h5 class="card-title"><a href=/api/moviedetail?ID=${item.ID}">${item.threadTitle}</a></h5>
+              <ul class="list-group list-group-flush">
+                                              <li class="list-group-item">
+                                                  Time: ${item.threadTime}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  User: ${item.username}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  Content: ${item.threadContent}
+                                              </li>
+                                          </ul>
+          </div>
+            <br>
+            <button class="delete">Unsubscribe</button>
+            <br>
+          </div>`;
+      });
+
+      document.getElementById("myList").innerHTML = movieRowBody;
+  }
+  getAllMovies();
+</script>
+
 <style>
-  h2, p {
+  h1, p {
     text-align: center;
   }
 
@@ -24,53 +58,67 @@
     color: black;
   }
 
+  #centre {
+    text-align: center;
+  }
+
   button {
-    background: none;
-    color: rgb(214, 42, 33);
-    border: none;
-    padding: 0;
+    background: rgb(214, 42, 33);
+    color: white;
     font: inherit;
-    text-decoration: underline;
+  }
+
+  .card-title a:link {
+    text-decoration: none;
+    color: rgb(214, 42, 33);
   }
 
 </style>
 
-<body class="d-flex flex-column min-vh-100">
+<body>
   <%- include('navbar2.ejs') %>
 
   <br>
-  <h2>My Subscriptions</h2>
+  <h1>My Subscriptions</h1>
   <br>
 
   <!--Demo of threads users are subscribed to-->
   <p>Here are the threads you are subscribed to:</p>
-  <ul class="threads">
+  <br>
+
+  <div id="myList"></div>
+
+  <!--<ul class="threads">
     <li><a class="links" href="/index">Welcome to the Forum! Last Post: April 1, 2022 @ 11:30 AM</a>  <button class="delete">Unsubscribe</button></li>
     <li><a class="links" href="/index">Rules Thread Last Post: April 1, 2022 @ 11:20 AM</a>  <button class="delete">Unsubscribe</button></li>
     <li><a class="links" href="/index">Harry Potter and The Philosopher's Stone Last Post: April 2, 2022 @ 9:30 PM</a>  <button class="delete">Unsubscribe</button></li>
-  </ul>
+  </ul>-->
 
   <script>
     
     // If user is not subscribed to anything, put up a message saying you are not subscribed to any threads.
-    if ($('.threads li').length === 0) {
-      $('.threads').append("<li>You are not currently subscribed to any threads.</li>");
+    if ($('#myList').html() === "") {
+      $('#myList').append("<p>You are not currently subscribed to any threads.</p>");
+      $('#myList').append("<p>Any threads you are subscribed to will appear here.</p>");
     }
 
     // Script to remove threads from your subscribed list.
     // Adapted from https://stackoverflow.com/questions/44716263/determine-empty-ul-tag-after-removing-li-tag
     $(document).on('click', '.delete', function(e) {
-      $(this).closest("li").remove();
+      $(this).parent().remove();
 
       // If there are no threads left user is subscribed to put up message in list saying you have no threads you are subscribed to.
-      if ($('.threads li').length === 0) {
-        $('.threads').append("<li>You are not currently subscribed to any threads.</li>");
+      if ($('#myList').html() === "") {
+        $('#myList').append("<p>You are not currently subscribed to any threads.</p>");
+        $('#myList').append("<p>Any threads you are subscribed to will appear here.</p>");
       }
 
     }); 
 
   </script>
 
+  <br>
+  <%- include('footer.ejs') %>
 </body>
 
 </html>
