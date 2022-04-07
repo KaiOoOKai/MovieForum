@@ -139,6 +139,11 @@ app.get('/mysubs', (req, res) => {
   res.render('mysubs');
 });
 
+// My threads
+app.get('/mythreads', (req, res) => {
+  res.render('mythreads');
+});
+
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
 });
