@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Threads</title>
+  <style>
+  </style>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+<script>
+  async function getAllMovies() {
+      const api_url = '/api/getAllMovies'
+      const response = await fetch(api_url);
+      const data = await response.json();
+      const list = document.getElementById("myList");
+      let movieRowBody = "";
+      data.forEach((item) => {
+          movieRowBody = movieRowBody + `<div class="card">
+          <div class="card-body">
+              <h5 class="card-title"><a href=/api/moviedetail?ID=${item.ID}">${item.threadTitle}</a></h5>
+              <ul class="list-group list-group-flush">
+                                              <li class="list-group-item">
+                                                  Time: ${item.threadTime}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  User: ${item.username}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  Content: ${item.threadContent}
+                                              </li>
+                                          </ul>
+          </div>
+          </div>`;
+      });
+
+      document.getElementById("myList").innerHTML = movieRowBody;
+  }
+  getAllMovies();
+</script>
+
+<style>
+  h1, p {
+    text-align: center;
+  }
+
+  .threads {
+    text-align: center;
+    list-style-type: none;
+  }
+
+  .links {
+    color: black;
+  }
+
+  #centre {
+    text-align: center;
+  }
+
+  button {
+    background: rgb(214, 42, 33);
+    color: white;
+    font: inherit;
+    text-align: center;
+  }
+
+  .card-title a:link {
+    text-decoration: none;
+    color: rgb(214, 42, 33);
+  }
+
+  .card-title a:hover {
+      text-decoration: underline;
+  }
+
+</style>
+
+<body>
+  <%- include('navbar2.ejs') %>
+
+  <br>
+  <h1>My Threads</h1>
+  <br>
+
+  <p>Here are the threads that you have created:</p>
+  <br>
+
+  <div id="myList"></div>
+
+  <br>
+  <br>
+
+  <div id ="centre">
+    <button onclick="window.location.href='/addthread'">Create New Thread</button>
+  </div>
+  
+
+  <script>
+    // If user is not subscribed to anything, put up a message saying you are not subscribed to any threads.
+    if ($('#myList').html() === "") {
+      $('#myList').append("<p>You currently have not created any threads.</p>");
+      $('#myList').append("<p>Any threads you create will appear here.</p>");
+    } 
+  </script>
+
+  <br>
+  <%- include('footer.ejs') %>
+</body>
+
+</html>
