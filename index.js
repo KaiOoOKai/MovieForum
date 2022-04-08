@@ -33,8 +33,16 @@ app.get('/signUp', (req, res) => {
 });
 
 //login
-app.get('/login', (req, res) => {
-  res.render('homeLogin');
+app.get('/userLogin', (req, res) => {
+  res.render('userLogin');
+});
+
+app.get('/adminLogin', (req, res) => {
+  res.render('adminLogin');
+});
+
+app.get('/moderatorLogin', (req, res) => {
+  res.render('moderatorLogin');
 });
 
 //Invalid Login
@@ -42,9 +50,13 @@ app.get('/invalidLogin', (req, res) => {
   res.render('invalidLogin');
 });
 
+
+
 //Home
 app.get('/home', (req, res) => {
-  res.render('home');
+
+  let results = threadData;
+  res.render('home', { results });
 });
 
 //Thread
@@ -81,31 +93,63 @@ app.get('/api/getAllMovies', (req, res) => {
   res.json(results);
 });
 
-app.post('/api/login', (req, res) => {
-  
-  let username =  req.body.username;
-  let password =  req.body.password;
-  let result = userData.filter(function (i,n){
-    return (n.username == username && n.password == password)
-  });
+app.post('/api/userlogin', (req, res) => {
 
-  if(result.length == 0)
-  {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  let result = userData.filter(function (n) {
+    return (n.username == username && n.password == password && n.type == 'user')
+  });
+  console.log(result);
+  if (result.length == 0) {
     res.redirect('/invalidLogin');
   }
-  else{
-    res.redirect('/');
+  else {
+    res.redirect('/home');
   }
-  console.log(username+" "+password);
-  let results = threadData;
-  res.json(results);
 });
 
+app.post('/api/adminlogin', (req, res) => {
+
+  let username = req.body.username;
+  let password = req.body.password;
+
+  let result = userData.filter(function (n) {
+    return (n.username == username && n.password == password && n.type == 'admin')
+  });
+  console.log(result);
+  if (result.length == 0) {
+    res.redirect('/invalidLogin');
+  }
+  else {
+    res.redirect('/admin');
+  }
+});
+
+app.post('/api/moderatorlogin', (req, res) => {
+
+  let username = req.body.username;
+  let password = req.body.password;
+
+  let result = userData.filter(function (n) {
+    return (n.username == username && n.password == password && n.type == 'moderator')
+  });
+  console.log(result);
+  if (result.length == 0) {
+    res.redirect('/invalidLogin');
+  }
+  else {
+    res.redirect('/home');
+  }
+});
+
+
 app.post('/api/removeUser', (req, res) => {
-  
-  let username =  req.body.username;
-  let password =  req.body.password;
-  let userData = userData.filter(function (i,n){
+
+  let username = req.body.username;
+  let password = req.body.password;
+  let userData = userData.filter(function (i, n) {
     return !(n.username == username && n.password == password)
   });
   let json = JSON.stringify(userData);
@@ -114,20 +158,26 @@ app.post('/api/removeUser', (req, res) => {
   res.redirect('/');
 });
 
-app.post('/api/addUser', (req, res) => {
-  
-  let username =  req.body.username;
-  let password =  req.body.password;
-  let newUser =  {
-    "username":username,
-    "password":password
-}
+app.post('/api/signup', (req, res) => {
+
+  let username = req.body.username;
+  let password = req.body.password;
+  let newUser = {
+    "username": username,
+    "password": password,
+    "type": "user"
+  }
 
   userData.push(newUser);
   let json = JSON.stringify(userData);
-  fs.writeFile('user.json', json);
-  // Need to change
-  res.redirect('/');
+  console.log(json)
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      res.redirect('/home');
+    }
+  });
 });
 
 app.get('/index', (req, res) => {

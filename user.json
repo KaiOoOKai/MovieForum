@@ -1,18 +1,1 @@
-[
-    {
-        "username":"testadmin",
-        "password":"1234",
-        "type":"admin"
-
-    },
-    {
-        "username":"testmoderator",
-        "password":"1234",
-        "type":"moderator"
-    },
-    {
-        "username":"testuser",
-        "password":"1234",
-        "type":"user"
-    }
-]
+[{"username":"admin","password":"1234","type":"admin"},{"username":"moderator","password":"1234","type":"moderator"},{"username":"user","password":"1234","type":"user"},{"username":"asda","password":"sdasa","type":"user"},{"username":"asda","password":"sadas","type":"user"}]
