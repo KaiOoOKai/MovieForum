@@ -144,6 +144,11 @@ app.get('/mythreads', (req, res) => {
   res.render('mythreads');
 });
 
+// Add thread
+app.get('/addthread', (req, res) => {
+  res.render('addthread');
+});
+
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
 });

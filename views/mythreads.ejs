@@ -63,6 +63,7 @@
     background: rgb(214, 42, 33);
     color: white;
     font: inherit;
+    text-align: center;
   }
 
   .card-title a:link {
@@ -83,11 +84,18 @@
   <h1>My Threads</h1>
   <br>
 
-  <!--Demo of threads users are subscribed to-->
   <p>Here are the threads that you have created:</p>
   <br>
 
   <div id="myList"></div>
+
+  <br>
+  <br>
+
+  <div id ="centre">
+    <button onclick="window.location.href='/addthread'">Create New Thread</button>
+  </div>
+  
 
   <script>
     // If user is not subscribed to anything, put up a message saying you are not subscribed to any threads.
