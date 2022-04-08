@@ -180,6 +180,30 @@ app.post('/api/signup', (req, res) => {
   });
 });
 
+app.post('/api/addthread', (req, res) => {
+
+  let username = req.body.username;
+  let password = req.body.password;
+  let newThread = {
+    "threadId": "1",
+    "threadTitle": "Harry Potter and the Sorcerer's Stone",
+    "threadTime": "2022-04-01 11:53pm",
+    "username": "kai",
+    "postContent": "This is a good movie!!!!!"
+  }
+
+  threadData.push(newThread);
+  let json = JSON.stringify(userData);
+  console.log(json)
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      res.redirect('/home');
+    }
+  });
+});
+
 app.get('/index', (req, res) => {
   res.render('index');
 });

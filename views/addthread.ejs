@@ -12,73 +12,73 @@
 
 
 <style>
-    h1, p {
-      text-align: center;
-    }
-  
-    button {
-      background: rgb(214, 42, 33);
-      color: white;
-      font: inherit;
-    }
+  h1,
+  p {
+    text-align: center;
+  }
 
-    input {
-        width: 70%;
-    }
+  button {
+    background: rgb(214, 42, 33);
+    color: white;
+    font: inherit;
+  }
 
-    textarea {
-        width: 70%;
-        height: 70%;
-        overflow-y: scroll;
-    }
-    
-    #formList {
-      padding-left: 25%;
-    }
-    
-    #centre {
-      text-align: center;
-    }
+  input {
+    width: 70%;
+  }
 
+  textarea {
+    width: 70%;
+    height: 70%;
+    overflow-y: scroll;
+  }
+
+  #formList {
+    padding-left: 25%;
+  }
+
+  #centre {
+    text-align: center;
+  }
 </style>
 
 <body>
   <%- include('navbar2.ejs') %>
 
-  <br>
-  <h1>Add Thread</h1>
-  <br>
+    <br>
+    <h1>Add Thread</h1>
+    <br>
 
-  <div id="formList">
-      <form>
-          <label for="title">Thread Name</label>
-          <br>
-          <input type="text" id="title" name="title">
-          <br>
-          <br>
-          <label for="description">Thread Description</label>
-          <br>
-          <textarea name="description" rows="7" cols="50" style="resize: none;"></textarea>
-          <br>
-          <br>
-          <label for="tags">Tags</label>
-          <br>
-          <input type="text" id="tags" name="tags">
-          <br>
-          <br>
+    <div id="formList">
+      <form action="/api/addthread" method="post">
+        <label for="title">Thread Name</label>
+        <br>
+        <input type="text" id="title" name="title">
+        <br>
+        <br>
+        <label for="description">Thread Description</label>
+        <br>
+        <textarea name="description" rows="7" cols="50" style="resize: none;"></textarea>
+        <br>
+        <br>
+        <label for="tags">Tags</label>
+        <br>
+        <input type="text" id="tags" name="tags">
+        <br>
+        <br>
       </form>
-  </div>
-  
-  <br>
-  <br>
+    </div>
 
-  <div id ="centre">
+    <br>
+    <br>
+
+    <div id="centre">
       <button>Create Thread</button>
-  </div>
+    </div>
 
-  <br>
+    <br>
 
-  <%- include('footer.ejs') %>
+    <%- include('footer.ejs') %>
 </body>
 
 </html>
