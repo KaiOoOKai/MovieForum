@@ -14,6 +14,13 @@ let threadData = JSON.parse(threadRaw);
 let userRaw = fs.readFileSync('user.json');
 let userData = JSON.parse(userRaw);
 
+const session = require('express-session');
+app.use(session({
+  secret: 'seng513',
+  resave: true,
+  saveUninitialized: true
+}));
+
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true })) //to parse HTML form data (aka read HTML form data)
 app.use(express.static(path.join(__dirname, '/public')));
@@ -55,8 +62,16 @@ app.get('/invalidLogin', (req, res) => {
 //Home
 app.get('/home', (req, res) => {
 
-  let results = threadData;
-  res.render('home', { results });
+  // If the user is loggedin
+  if (req.session.loggedin) {
+    let results = threadData;
+    res.render('home', { results });
+  } else {
+    // Not logged in
+    res.send('Please login to view this page!');
+  }
+  res.end();
+
 });
 
 //Thread
@@ -78,11 +93,7 @@ app.get('/search', (req, res) => {
 
 app.get('/api/movies', (req, res) => {
   const keyword = req.query.keyword;
-
-
   let results = threadData;
-
-
 
   res.json(results);
 
@@ -106,6 +117,9 @@ app.post('/api/userlogin', (req, res) => {
     res.redirect('/invalidLogin');
   }
   else {
+    // Authenticate the user
+    req.session.loggedin = true;
+    req.session.username = username;
     res.redirect('/home');
   }
 });
@@ -123,6 +137,9 @@ app.post('/api/adminlogin', (req, res) => {
     res.redirect('/invalidLogin');
   }
   else {
+    // Authenticate the user
+    req.session.loggedin = true;
+    req.session.username = username;
     res.redirect('/admin');
   }
 });
@@ -140,6 +157,9 @@ app.post('/api/moderatorlogin', (req, res) => {
     res.redirect('/invalidLogin');
   }
   else {
+    // Authenticate the user
+    req.session.loggedin = true;
+    req.session.username = username;
     res.redirect('/home');
   }
 });
@@ -226,3 +246,5 @@ app.get('/addthread', (req, res) => {
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
 });
+
+module.exports = app;
