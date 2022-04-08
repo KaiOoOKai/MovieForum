@@ -1,0 +1,26 @@
+[
+    {
+        "threadId":"1",
+        "threadTitle": "Thread 1 Title",
+        "threadTime": "2022-04-01 11:53pm",
+        "username": "kai",
+        "postContent": "This is a thread about something",
+        "votes":12
+    },
+    [
+        {
+            "commentId":"1",
+            "content": "Comment 1",
+            "commentTime": "2022-04-02 11:53pm",
+            "username": "SickSid",
+            "votes":6
+        },
+        {
+            "commentId":"1.1",
+            "content": "Comment 1.1",
+            "commentTime": "2022-04-02 11:53pm",
+            "username": "SickSid",
+            "votes":4
+        }
+    ]
+]
