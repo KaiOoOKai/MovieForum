@@ -5,8 +5,8 @@
     <%- include('navbar.ejs') %>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/threads.css" media="screen" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./css/threads.css" media="screen" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Thread Page</title>
         <script type="text/javascript" src="thread.json"></script>
@@ -19,6 +19,93 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
+<style>
+  .comment-card {
+    background-color: rgb(245, 146, 146);
+    border-radius: 3px;
+    border: 2px solid gray;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    margin-bottom: 1%;
+  }
+  .level2 {
+    margin-left: 5%;
+  }
+  .level3 {
+    margin-left: 10%;
+  }
+  .level4 {
+    margin-left: 15%;
+  }
+  .level5 {
+    margin-left: 20%;
+  }
+  .comment-title {
+    width: 100%;
+    padding-left: 10px;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
+  }
+  .comment-container {
+    display: flex;
+    flex-direction: row;
+  }
+  .collaps {
+    width: 5%;
+    border: 1px solid black;
+    border-radius: 40px;
+    text-align: center;
+    align-self: center;
+  }
+  .vote-section {
+    width: 5%;
+    text-align: center;
+    padding: 1%;
+  }
+  .comment-body {
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1%;
+    width: 90%;
+  }
+  .comment-footer {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    padding-top: 5px;
+  }
+  .comment-user {
+    width: 10%;
+    text-align: center;
+    font-style: italic;
+
+  }
+  .comment-timestamp {
+    width: 10%;
+    padding-left: 10px;
+  }
+  .tags {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: end;
+    padding-right: 5%;
+    padding-left: 1%;
+  }
+  .tag {
+    margin-left: 1%;
+    margin-right: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    border-radius: 20px;
+    border: 1px solid black;
+  }
+  .add-tag {
+    font-style: italic;
+    background-color: rgb(227, 115, 222);
+  }
+</style>
 <script>
     async function getThread1() {
         const api_url = '/api/getAllMovies'
@@ -63,14 +150,144 @@
     </div>
     <div class="commentsContainer">
       <div id="example">Example Div</div>
-      <div class="card-body">
-        Comment 1
+      <div class="comment-card">
+        <div class="comment-title">
+          Thread title
+        </div>
+        <div class="comment-container">
+          <div class="vote-section">
+            <!-- Upvote thingy goes here -->
+            <div class="upvote">
+              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+            </div>
+            45
+          </div>
+          <div class="comment-body">
+            Post 1 body
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="comment-user">            
+            User name
+          </div>
+          <div class="comment-timestamp">
+            09.04.2022
+          </div>
+          <div class="tags">
+            <div class="tag">
+              tag 1
+            </div>
+            <div class="tag">
+              tag 2
+            </div>
+            <div class="tag">
+              tag 3
+            </div>
+            <div class="tag add-tag">
+              add tag 
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        Comment 2
+      <div class="comment-card">
+        <div class="comment-container">
+          <div class="collaps">
+            collapse
+          </div>
+          <div class="vote-section">
+            <!-- Upvote thingy goes here -->
+            <div class="upvote">
+              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+            </div>
+            45
+          </div>
+          <div class="comment-body">
+            Comment 1 body
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="comment-user">            
+            User name
+          </div>
+          <div class="comment-timestamp">
+            09.04.2022
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        Comment 3
+      <div class="comment-card level2">
+        <div class="comment-container">
+          <div class="collaps">
+            collapse
+          </div>
+          <div class="vote-section">
+            <!-- Upvote thingy goes here -->
+            <div class="upvote">
+              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+            </div>
+            45
+          </div>
+          <div class="comment-body">
+            Comment 1.1 body
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="comment-user">            
+            User name
+          </div>
+          <div class="comment-timestamp">
+            09.04.2022
+          </div>
+        </div>
+      </div>
+      <div class="comment-card">
+        <div class="comment-container">
+          <div class="collaps">
+            collapse
+          </div>
+          <div class="vote-section">
+            <!-- Upvote thingy goes here -->
+            <div class="upvote">
+              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+            </div>
+            45
+          </div>
+          <div class="comment-body">
+            Comment 2 body
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="comment-user">            
+            User name
+          </div>
+          <div class="comment-timestamp">
+            09.04.2022
+          </div>
+        </div>
+      </div>
+      <div class="comment-card">
+        <div class="comment-container">
+          <div class="collaps">
+            collapse
+          </div>
+          <div class="vote-section">
+            <!-- Upvote thingy goes here -->
+            <div class="upvote">
+              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+            </div>
+            45
+          </div>
+          <div class="comment-body">
+            Comment 3 body
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="comment-user">            
+            User name
+          </div>
+          <div class="comment-timestamp">
+            09.04.2022
+          </div>
+        </div>
       </div>
     </div>
   </div>
