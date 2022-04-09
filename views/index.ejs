@@ -10,13 +10,60 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
+  async function getAllMovies() {
+      const api_url = '/api/getAllMovies'
+      const response = await fetch(api_url);
+      const data = await response.json();
+      const list = document.getElementById("myList");
+      let movieRowBody = "";
+      data.forEach((item) => {
+          movieRowBody = movieRowBody + `<div class="card">
+          <div class="card-body">
+              <h5 class="card-title"><a href=/api/moviedetail?ID=${item.ID}">${item.threadTitle}</a></h5>
+              <ul class="list-group list-group-flush">
+                                              <li class="list-group-item">
+                                                  Time: ${item.threadTime}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  User: ${item.username}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  Content: ${item.threadContent}
+                                              </li>
+                                          </ul>
+          </div>
+          </div>`;
+      });
 
+      document.getElementById("myList").innerHTML = movieRowBody;
+  }
+  getAllMovies();
 </script>
+
+<style>
+  h1, p {
+    text-align: center;
+  }
+
+  .card-title a:link {
+    text-decoration: none;
+    color: rgb(214, 42, 33);
+  }
+
+  .card-title a:hover {
+      text-decoration: underline;
+  }
+</style>
 
 <body class="d-flex flex-column min-vh-100">
   <%- include('navbar.ejs') %>
-  <!--<%- include('navbar2.ejs') %>-->
-    Test
+  <br>
+  <h1>Home Page</h1>
+  <br>
+  <p>Welcome! Here are some popular threads to view right now:</p>
+
+  <div id="myList"></div>
+
   <%- include('footer.ejs') %>
 </body>
 
