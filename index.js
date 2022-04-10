@@ -96,6 +96,16 @@ app.get('/api/getAllUsers', (req, res) => {
   res.json(results);
 });
 
+app.delete('/deleteUser', (req, res) => {
+
+  let username = req.username;
+  let result = userData.filter(function (n) {
+    return (n.username == username)
+  });
+  console.log(result);
+  res.redirect('/admin');
+  
+});
 
 
 //search
