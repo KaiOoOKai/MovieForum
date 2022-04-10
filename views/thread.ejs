@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-    <%- include('navbar.ejs') %>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="./css/threads.css" media="screen" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Thread Page</title>
-        <script type="text/javascript" src="thread.json"></script>
-        <script>
-            var mydata = JSON.parse(data);
-            alert(mydata);
-        </script>
+  <%- include('navbar.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/threads.css" media="screen" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thread Page</title>
+    <script type="text/javascript" src="thread.json"></script>
+    <script>
+      var mydata = JSON.parse(data);
+      alert(mydata);
+    </script>
 </head>
 <script src="/socket.io/socket.io.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -28,18 +28,23 @@
     padding-left: 5px;
     margin-bottom: 1%;
   }
+
   .level2 {
     margin-left: 5%;
   }
+
   .level3 {
     margin-left: 10%;
   }
+
   .level4 {
     margin-left: 15%;
   }
+
   .level5 {
     margin-left: 20%;
   }
+
   .comment-title {
     width: 100%;
     padding-left: 10px;
@@ -47,10 +52,12 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: xx-large;
   }
+
   .comment-container {
     display: flex;
     flex-direction: row;
   }
+
   .collaps {
     width: 5%;
     border: 1px solid black;
@@ -58,33 +65,39 @@
     text-align: center;
     align-self: center;
   }
+
   .vote-section {
     width: 5%;
     text-align: center;
     padding: 1%;
   }
+
   .comment-body {
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
     padding: 1%;
     width: 90%;
   }
+
   .comment-footer {
     display: flex;
     flex-direction: row;
     align-content: space-around;
     padding-top: 5px;
   }
+
   .comment-user {
     width: 10%;
     text-align: center;
     font-style: italic;
 
   }
+
   .comment-timestamp {
     width: 10%;
     padding-left: 10px;
   }
+
   .tags {
     display: flex;
     flex-direction: row;
@@ -93,6 +106,7 @@
     padding-right: 5%;
     padding-left: 1%;
   }
+
   .tag {
     margin-left: 1%;
     margin-right: 1%;
@@ -101,22 +115,23 @@
     border-radius: 20px;
     border: 1px solid black;
   }
+
   .add-tag {
     font-style: italic;
     background-color: rgb(227, 115, 222);
   }
 </style>
 <script>
-    async function getThread1() {
-        const api_url = '/api/getAllMovies'
-        const response = await fetch(api_url);
-        const data = await response.json();
-        const list = document.getElementById("myList");
-        const post = data[0];
-        const comments = data[1];
-        let movieRowBody = "";
-        data.forEach((item) => {
-            movieRowBody = movieRowBody + `<div class="card">
+  async function getThread1() {
+    const api_url = '/api/getAllMovies'
+    const response = await fetch(api_url);
+    const data = await response.json();
+    const list = document.getElementById("myList");
+    const post = data[0];
+    const comments = data[1];
+    let movieRowBody = "";
+    data.forEach((item) => {
+      movieRowBody = movieRowBody + `<div class="card">
             <div class="card-body">
                 <h5 class="card-title">${item.threadTitle}</h5>
                 <ul class="list-group list-group-flush">
@@ -133,10 +148,10 @@
                 <a href=/api/moviedetail?ID=${item.ID}" class="stretched-link"></a>
             </div>
             </div>`;
-        });
-        list.innerHTML = movieRowBody;
-    }
-    getThread1();
+    });
+    list.innerHTML = movieRowBody;
+  }
+  getThread1();
 </script>
 
 
@@ -167,7 +182,7 @@
           </div>
         </div>
         <div class="comment-footer">
-          <div class="comment-user">            
+          <div class="comment-user">
             User name
           </div>
           <div class="comment-timestamp">
@@ -184,7 +199,7 @@
               tag 3
             </div>
             <div class="tag add-tag">
-              add tag 
+              add tag
             </div>
           </div>
         </div>
@@ -197,7 +212,7 @@
           <div class="vote-section">
             <!-- Upvote thingy goes here -->
             <div class="upvote">
-              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+              <img src="..\public\img\upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
             </div>
             45
           </div>
@@ -206,7 +221,7 @@
           </div>
         </div>
         <div class="comment-footer">
-          <div class="comment-user">            
+          <div class="comment-user">
             User name
           </div>
           <div class="comment-timestamp">
@@ -222,7 +237,7 @@
           <div class="vote-section">
             <!-- Upvote thingy goes here -->
             <div class="upvote">
-              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+              <img src="public\img\upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
             </div>
             45
           </div>
@@ -231,7 +246,7 @@
           </div>
         </div>
         <div class="comment-footer">
-          <div class="comment-user">            
+          <div class="comment-user">
             User name
           </div>
           <div class="comment-timestamp">
@@ -256,7 +271,7 @@
           </div>
         </div>
         <div class="comment-footer">
-          <div class="comment-user">            
+          <div class="comment-user">
             User name
           </div>
           <div class="comment-timestamp">
@@ -281,7 +296,7 @@
           </div>
         </div>
         <div class="comment-footer">
-          <div class="comment-user">            
+          <div class="comment-user">
             User name
           </div>
           <div class="comment-timestamp">

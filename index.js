@@ -202,20 +202,29 @@ app.post('/api/signup', (req, res) => {
 
 app.post('/api/addthread', (req, res) => {
 
-  let username = req.body.username;
-  let password = req.body.password;
+  let title = req.body.title;
+  let description = req.body.description;
+  let tags = req.body.tags;
+  var currentdate = new Date();
+  console.log('aaaa' + req.session.username)
+  var datetime =
+    + (currentdate.getMonth() + 1) + "/"
+    + currentdate.getDate() + "/"
+    + currentdate.getFullYear() + " "
+    + ((currentdate.getHours() < 10) ? "0" : "") + currentdate.getHours() + ":" + ((currentdate.getMinutes() < 10) ? "0" : "") + currentdate.getMinutes()
+
   let newThread = {
-    "threadId": "1",
-    "threadTitle": "Harry Potter and the Sorcerer's Stone",
-    "threadTime": "2022-04-01 11:53pm",
-    "username": "kai",
-    "postContent": "This is a good movie!!!!!"
+    "threadTitle": title,
+    "threadTime": datetime,
+    "username": req.session.username,
+    "threadContent": description,
+    "tags": tags,
   }
 
   threadData.push(newThread);
-  let json = JSON.stringify(userData);
+  let json = JSON.stringify(threadData);
   console.log(json)
-  fs.writeFile("user.json", json, (err) => {
+  fs.writeFile("thread.json", json, (err) => {
     if (err)
       console.log(err);
     else {

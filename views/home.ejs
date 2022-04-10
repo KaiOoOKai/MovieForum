@@ -11,15 +11,15 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
   async function getAllMovies() {
-      const api_url = '/api/getAllMovies'
-      const response = await fetch(api_url);
-      const data = await response.json();
-      const list = document.getElementById("myList");
-      let movieRowBody = "";
-      data.forEach((item) => {
-          movieRowBody = movieRowBody + `<div class="card">
+    const api_url = '/api/getAllMovies'
+    const response = await fetch(api_url);
+    const data = await response.json();
+    const list = document.getElementById("myList");
+    let movieRowBody = "";
+    data.forEach((item) => {
+      movieRowBody = movieRowBody + `<div class="card">
           <div class="card-body">
-              <h5 class="card-title"><a href=/api/moviedetail?ID=${item.ID}">${item.threadTitle}</a></h5>
+              <h5 class="card-title"><a href=/api/moviedetail?threadTitle=${item.threadTitle}">${item.threadTitle}</a></h5>
               <ul class="list-group list-group-flush">
                                               <li class="list-group-item">
                                                   Time: ${item.threadTime}
@@ -33,15 +33,16 @@
                                           </ul>
           </div>
           </div>`;
-      });
+    });
 
-      document.getElementById("myList").innerHTML = movieRowBody;
+    document.getElementById("myList").innerHTML = movieRowBody;
   }
   getAllMovies();
 </script>
 
 <style>
-  h1, p {
+  h1,
+  p {
     text-align: center;
   }
 
@@ -51,7 +52,7 @@
   }
 
   .card-title a:hover {
-      text-decoration: underline;
+    text-decoration: underline;
   }
 </style>
 
