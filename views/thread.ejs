@@ -92,6 +92,10 @@
     padding-left: 10px;
   }
 
+  .comment-title {
+    text-align: center;
+  }
+
   .tags {
     display: flex;
     flex-direction: row;
@@ -114,6 +118,16 @@
     font-style: italic;
     background-color: rgb(227, 115, 222);
   }
+
+  h1, p {
+    text-align: center;
+  }
+
+  button {
+    background: rgb(214, 42, 33);
+    color: white;
+    font: inherit;
+  }
 </style>
 <script>
   const api_url = '/api/getPosts';
@@ -131,7 +145,7 @@
           <div class="vote-section">
             <!-- Upvote thingy goes here -->
             <div class="upvote">
-              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
+              <button class="delete">Upvote</button>
             </div>
             45
           </div>
@@ -170,9 +184,11 @@
 
 
 <body class="d-flex flex-column min-vh-100">
-  <h1>thread page</h1>
+  <br>
+  <h1>Thread Page</h1>
+  <br>
   <div class="comment-title">
-    Thread title
+    Thread Title
   </div>
   <div class="mainContainer">
     <div class="commentsContainer" id="commentsContainer">
