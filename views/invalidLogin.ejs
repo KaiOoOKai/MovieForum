@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <title>Movie</title>
-  <style>
-  </style>
+    <title>Movie</title>
+    <style>
+    </style>
 </head>
 <script src="/socket.io/socket.io.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -13,18 +13,18 @@
 
 <body class="d-flex flex-column min-vh-100">
     <%- include('navbar.ejs') %>
-    <section class="text-dark p-5 p-lg-3 pt-lg-5">
-        <div class="d-flex justify-content-center">
+        <section class="text-dark p-5 p-lg-3 pt-lg-5">
+            <div class="d-flex justify-content-center">
 
-            <div class="d-flex flex-column">
-                <div class="pt-5">Sorry, your user name or password may be incorrect.
-                    <a class="links" href="/login">Try again</a>
-                </divSS>
-            </div>
-        </div>
-    </section>
-  
-    <%- include('footer.ejs') %>
+                <div class="d-flex flex-column">
+                    <div class="pt-5">Sorry, your user name or password may be incorrect.
+                        <a class="links" href="/userLogin">Try again</a>
+                        </divSS>
+                    </div>
+                </div>
+        </section>
+
+        <%- include('footer.ejs') %>
 </body>
 
 </html>

@@ -76,7 +76,12 @@ app.get('/home', (req, res) => {
 
 //Thread
 app.get('/thread', (req, res) => {
-  res.render('thread');
+  const threadTitle = req.query.threadTitle;
+  let results = threadData;
+  results = results.filter(function (item) {
+    return item.username == req.session.username;
+  });
+  res.render('thread', { threadTitle: threadTitle });
 });
 
 
@@ -239,6 +244,15 @@ app.post('/api/addthread', (req, res) => {
       res.redirect('/home');
     }
   });
+});
+
+app.get('/api/getPosts', (req, res) => {
+
+  let title = req.query.threadTitle;
+
+  let result = threadData.filter(a => { return a.threadTitle == title });
+  console.log(result)
+  res.json(result);
 });
 
 app.get('/index', (req, res) => {

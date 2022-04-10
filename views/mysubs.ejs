@@ -12,15 +12,15 @@
 
 <script>
   async function getAllMovies() {
-      const api_url = '/api/getAllMovies'
-      const response = await fetch(api_url);
-      const data = await response.json();
-      const list = document.getElementById("myList");
-      let movieRowBody = "";
-      data.forEach((item) => {
-          movieRowBody = movieRowBody + `<div class="card">
+    const api_url = '/api/getAllMovies'
+    const response = await fetch(api_url);
+    const data = await response.json();
+    const list = document.getElementById("myList");
+    let movieRowBody = "";
+    data.forEach((item) => {
+      movieRowBody = movieRowBody + `<div class="card">
           <div class="card-body">
-              <h5 class="card-title"><a href=/api/moviedetail?ID=${item.ID}">${item.threadTitle}</a></h5>
+              <h5 class="card-title"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
               <ul class="list-group list-group-flush">
                                               <li class="list-group-item">
                                                   Time: ${item.threadTime}
@@ -37,15 +37,16 @@
             <button class="delete">Unsubscribe</button>
             <br>
           </div>`;
-      });
+    });
 
-      document.getElementById("myList").innerHTML = movieRowBody;
+    document.getElementById("myList").innerHTML = movieRowBody;
   }
   getAllMovies();
 </script>
 
 <style>
-  h1, p {
+  h1,
+  p {
     text-align: center;
   }
 
@@ -70,48 +71,47 @@
   }
 
   .card-title a:hover {
-      text-decoration: underline;
+    text-decoration: underline;
   }
-
 </style>
 
 <body>
   <%- include('navbar2.ejs') %>
 
-  <br>
-  <h1>My Subscriptions</h1>
-  <br>
+    <br>
+    <h1>My Subscriptions</h1>
+    <br>
 
-  <p>Here are the threads you are subscribed to:</p>
-  <br>
+    <p>Here are the threads you are subscribed to:</p>
+    <br>
 
-  <div id="myList"></div>
+    <div id="myList"></div>
 
-  <script>
-    
-    // If user is not subscribed to anything, put up a message saying you are not subscribed to any threads.
-    if ($('#myList').html() === "") {
-      $('#myList').append("<p>You are not currently subscribed to any threads.</p>");
-      $('#myList').append("<p>Any threads you are subscribed to will appear here.</p>");
-    }
+    <script>
 
-    // Script to remove threads from your subscribed list.
-    // Adapted from https://stackoverflow.com/questions/44716263/determine-empty-ul-tag-after-removing-li-tag
-    $(document).on('click', '.delete', function(e) {
-      $(this).parent().remove();
-
-      // If there are no threads left user is subscribed to put up message in list saying you have no threads you are subscribed to.
+      // If user is not subscribed to anything, put up a message saying you are not subscribed to any threads.
       if ($('#myList').html() === "") {
         $('#myList').append("<p>You are not currently subscribed to any threads.</p>");
         $('#myList').append("<p>Any threads you are subscribed to will appear here.</p>");
       }
 
-    }); 
+      // Script to remove threads from your subscribed list.
+      // Adapted from https://stackoverflow.com/questions/44716263/determine-empty-ul-tag-after-removing-li-tag
+      $(document).on('click', '.delete', function (e) {
+        $(this).parent().remove();
 
-  </script>
+        // If there are no threads left user is subscribed to put up message in list saying you have no threads you are subscribed to.
+        if ($('#myList').html() === "") {
+          $('#myList').append("<p>You are not currently subscribed to any threads.</p>");
+          $('#myList').append("<p>Any threads you are subscribed to will appear here.</p>");
+        }
 
-  <br>
-  <%- include('footer.ejs') %>
+      });
+
+    </script>
+
+    <br>
+    <%- include('footer.ejs') %>
 </body>
 
 </html>

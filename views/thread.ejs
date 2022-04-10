@@ -6,16 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/threads.css" media="screen" />
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thread Page</title>
-    <script type="text/javascript" src="thread.json"></script>
-    <script>
-      var mydata = JSON.parse(data);
-      alert(mydata);
-    </script>
 </head>
-<script src="/socket.io/socket.io.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
@@ -122,53 +116,17 @@
   }
 </style>
 <script>
-  async function getThread1() {
-    const api_url = '/api/getAllMovies'
-    const response = await fetch(api_url);
+  const api_url = '/api/getPosts';
+  async function getPosts() {
+    const response = await fetch(api_url.concat(`?threadTitle=${'<%= threadTitle %>'}`));
     const data = await response.json();
-    const list = document.getElementById("myList");
-    const post = data[0];
-    const comments = data[1];
-    let movieRowBody = "";
-    data.forEach((item) => {
-      movieRowBody = movieRowBody + `<div class="card">
-            <div class="card-body">
-                <h5 class="card-title">${item.threadTitle}</h5>
-                <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">
-                                                    Time: ${item.threadTime}
-                                                </li>
-                                                <li class="list-group-item">
-                                                    User: ${item.username}
-                                                </li>
-                                                <li class="list-group-item">
-                                                    Content: ${item.threadContent}
-                                                </li>
-                                            </ul>
-                <a href=/api/moviedetail?ID=${item.ID}" class="stretched-link"></a>
-            </div>
-            </div>`;
-    });
-    list.innerHTML = movieRowBody;
-  }
-  getThread1();
-</script>
+    const list = document.getElementById("commentsContainer");
 
+    let postRowBody = "";
 
-<body class="d-flex flex-column min-vh-100">
-  <h1>thread page</h1>
-  <div id="myList"></div>
-  <div class="mainContainer">
-    <div class="thraedContainer">
-      <h1 id="threadTitle">Thread title</h1>
-      <p id="threadContent">Thread content</p>
-    </div>
-    <div class="commentsContainer">
-      <div id="example">Example Div</div>
-      <div class="comment-card">
-        <div class="comment-title">
-          Thread title
-        </div>
+    data[0].posts.forEach((item) => {
+      postRowBody = postRowBody + `<div class="comment-card">
+
         <div class="comment-container">
           <div class="vote-section">
             <!-- Upvote thingy goes here -->
@@ -177,16 +135,16 @@
             </div>
             45
           </div>
-          <div class="comment-body">
-            Post 1 body
-          </div>
+          <div class="comment-body">`+
+        item.postContent +
+        `</div>
         </div>
         <div class="comment-footer">
           <div class="comment-user">
-            User name
+            `+ item.postUser + `
           </div>
           <div class="comment-timestamp">
-            09.04.2022
+            `+ item.postTime + `
           </div>
           <div class="tags">
             <div class="tag">
@@ -203,107 +161,22 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="comment-card">
-        <div class="comment-container">
-          <div class="collaps">
-            collapse
-          </div>
-          <div class="vote-section">
-            <!-- Upvote thingy goes here -->
-            <div class="upvote">
-              <img src="..\public\img\upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
-            </div>
-            45
-          </div>
-          <div class="comment-body">
-            Comment 1 body
-          </div>
-        </div>
-        <div class="comment-footer">
-          <div class="comment-user">
-            User name
-          </div>
-          <div class="comment-timestamp">
-            09.04.2022
-          </div>
-        </div>
-      </div>
-      <div class="comment-card level2">
-        <div class="comment-container">
-          <div class="collaps">
-            collapse
-          </div>
-          <div class="vote-section">
-            <!-- Upvote thingy goes here -->
-            <div class="upvote">
-              <img src="public\img\upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
-            </div>
-            45
-          </div>
-          <div class="comment-body">
-            Comment 1.1 body
-          </div>
-        </div>
-        <div class="comment-footer">
-          <div class="comment-user">
-            User name
-          </div>
-          <div class="comment-timestamp">
-            09.04.2022
-          </div>
-        </div>
-      </div>
-      <div class="comment-card">
-        <div class="comment-container">
-          <div class="collaps">
-            collapse
-          </div>
-          <div class="vote-section">
-            <!-- Upvote thingy goes here -->
-            <div class="upvote">
-              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
-            </div>
-            45
-          </div>
-          <div class="comment-body">
-            Comment 2 body
-          </div>
-        </div>
-        <div class="comment-footer">
-          <div class="comment-user">
-            User name
-          </div>
-          <div class="comment-timestamp">
-            09.04.2022
-          </div>
-        </div>
-      </div>
-      <div class="comment-card">
-        <div class="comment-container">
-          <div class="collaps">
-            collapse
-          </div>
-          <div class="vote-section">
-            <!-- Upvote thingy goes here -->
-            <div class="upvote">
-              <img src="../public/img/upvoteArrow.jpg" alt="upvote arrow" width="20px" height="20px">
-            </div>
-            45
-          </div>
-          <div class="comment-body">
-            Comment 3 body
-          </div>
-        </div>
-        <div class="comment-footer">
-          <div class="comment-user">
-            User name
-          </div>
-          <div class="comment-timestamp">
-            09.04.2022
-          </div>
-        </div>
-      </div>
+      </div>`;
+    });
+    list.innerHTML = postRowBody;
+  }
+  getPosts();
+</script>
+
+
+<body class="d-flex flex-column min-vh-100">
+  <h1>thread page</h1>
+  <div class="comment-title">
+    Thread title
+  </div>
+  <div class="mainContainer">
+    <div class="commentsContainer" id="commentsContainer">
+
     </div>
   </div>
 </body>
