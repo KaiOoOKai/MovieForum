@@ -13,6 +13,21 @@
             var mydata = JSON.parse(data);
             alert(mydata);
         </script>
+        <style>
+            h1,
+            p {
+                text-align: center;
+            }
+
+            .card-title a:link {
+                text-decoration: none;
+                color: rgb(214, 42, 33);
+            }
+
+            .card-title a:hover {
+                text-decoration: underline;
+            }
+        </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -48,41 +63,36 @@
     <div id="message"></div>
 
     <script>
-        const api_url = '/api/movies'
-        async function getmovies() {
+        async function getAllMovies() {
+            const api_url = '/api/movies'
             const response = await fetch(api_url.concat(`?keyword=${'<%= keyword %>'}`));
             const data = await response.json();
             const list = document.getElementById("myList");
-            if (data.length == 0) {
-                document.getElementById("message").innerHTML = `No movies with keyword '${'<%= keyword %>'}'`;
-                return;
-            }
             let movieRowBody = "";
             data.forEach((item) => {
                 movieRowBody = movieRowBody + `<div class="card">
           <div class="card-body">
-            <h5 class="card-title">${item.threadTitle}</h5>
-            <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                Time: ${item.threadTime}
-                                            </li>
-                                               <li class="list-group-item">
-                                                User: ${item.username}
-                                            </li>
-                                               <li class="list-group-item">
-                                                Content: ${item.threadContent}
-                                            </li>
-                                        </ul>
-            <a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a>
+              <h5 class="card-title"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
+              <ul class="list-group list-group-flush">
+                                              <li class="list-group-item">
+                                                  Time: ${item.threadTime}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  User: ${item.username}
+                                              </li>
+                                              <li class="list-group-item">
+                                                  Content: ${item.threadContent}
+                                              </li>
+                                          </ul>
           </div>
-        </div>`;
+          </div>`;
             });
-            document.getElementById("movieRow").innerHTML = movieRowBody;
-        }
-        console.log('<%= keyword %>');
-        getmovies();
-    </script>
 
+            document.getElementById("myList").innerHTML = movieRowBody;
+        }
+        getAllMovies();
+    </script>
+    <div id="myList"></div>
 </body>
 
 </html>

@@ -21,13 +21,37 @@
         "threadTitle": "1",
         "threadTime": "4/9/2022 18:7",
         "postContent": "2",
-        "tags": "3"
+        "tags": "3",
+        "posts": [
+            {
+                "postUser": "kai",
+                "postContent": "12312312321321",
+                "postTime": "2022-04-09 11:20pm"
+            },
+            {
+                "postUser": "kai",
+                "postContent": "12312312321321",
+                "postTime": "2022-04-09 11:20pm"
+            }
+        ]
     },
     {
         "threadTitle": "Thread Title",
         "threadTime": "4/9/2022 18:12",
         "threadContent": "Hello, I'm content",
-        "tags": "1111111"
+        "tags": "1111111",
+        "posts": [
+            {
+                "postUser": "kai",
+                "postContent": "12312312321321",
+                "postTime": "2022-04-09 11:20pm"
+            },
+            {
+                "postUser": "kai",
+                "postContent": "12312312321321",
+                "postTime": "2022-04-09 11:20pm"
+            }
+        ]
     },
     {
         "threadTitle": "111",

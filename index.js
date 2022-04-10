@@ -99,6 +99,10 @@ app.get('/search', (req, res) => {
 app.get('/api/movies', (req, res) => {
   const keyword = req.query.keyword;
   let results = threadData;
+  results = results.filter(item => {
+    return item.threadTitle.toLowerCase().includes(keyword.toLowerCase())
+  })
+
 
   res.json(results);
 
@@ -250,7 +254,7 @@ app.get('/api/getPosts', (req, res) => {
 
   let title = req.query.threadTitle;
 
-  let result = threadData.filter(a => { return a.threadTitle == title });
+  let result = threadData.filter(a => { return a.threadTitle.toLowerCase().includes(title.toLowerCase()) });
   console.log(result)
   res.json(result);
 });
