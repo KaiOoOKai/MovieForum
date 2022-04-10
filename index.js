@@ -104,6 +104,14 @@ app.get('/api/getAllMovies', (req, res) => {
   res.json(results);
 });
 
+app.get('/api/getMyThreads', (req, res) => {
+  let results = threadData;
+  results = results.filter(function (item) {
+    return item.username == req.session.username;
+  });
+  res.json(results);
+});
+
 app.post('/api/userlogin', (req, res) => {
 
   let username = req.body.username;
