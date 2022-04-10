@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <title>Admin</title>
-  <style>
-  </style>
+    <title>Admin</title>
+    <style>
+    </style>
 </head>
 <script src="/socket.io/socket.io.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -12,58 +12,61 @@
 
 
 <body class="d-flex flex-column min-vh-100">
-  <%- include('navbar2.ejs') %>
-  <br>
-  <h1 class="text-center">Administrator</h1>
-  <br>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-        $('#select-all').click(function(event) {   
-            if(this.checked) {
-                // Iterate each checkbox
-                $(':checkbox').each(function() {
-                    this.checked = true;                        
-                });
-            } else {
-                $(':checkbox').each(function() {
-                    this.checked = false;                       
-                });
-            }
-        }); 
-  </script>
+    <%- include('navbar2.ejs') %>
+        <br>
+        <h1 class="text-center">Manage Users</h1>
+        <br>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+            $('#select-all').click(function (event) {
+                if (this.checked) {
+                    // Iterate each checkbox
+                    $(':checkbox').each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    $(':checkbox').each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+        </script>
 
-  <section class="d-flex">
-        <div class="col-9 flex-grow-1 d-flex flex-column ">
-            <div class="container mt-5 p-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table align-middle text-center">
-                            <thread>
-                                <tr>
-                                    <td><button class="btn btn btn-danger" type="submit" >Promote to Moderator</button></td>
-                                    <td><button class="btn btn-danger" type="submit">Promote to Admin</button></td>
-                                    <td><button class="btn btn-danger" type="submit" >Delete User</button></td>
-                                </tr>
-                            </thread>
-                        </table>
-                        <table class="table table-bordered align-middle text-center">
-                           
-                            <thread>
-                                <tr>
-                                    <td>User Name</td>
-                                    <td>Last Login Time</td>
-                                    <td>Posts</td>
-                                </tr>
-                            </thread>
-                            
+        <section class="d-flex">
+            <div class="col-9 flex-grow-1 d-flex flex-column ">
+                <div class="container mt-5 p-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table align-middle text-center">
+                                <thread>
+                                    <tr>
+                                        <td><button class="btn btn btn-danger" type="submit">Promote to
+                                                Moderator</button></td>
+                                        <td><button class="btn btn-danger" type="submit">Promote to Admin</button></td>
+                                        <td><button class="btn btn-danger" type="submit">Delete User</button></td>
+                                    </tr>
+                                </thread>
+                            </table>
+                            <table class="table table-bordered align-middle text-center">
+
+                                <thread id="usersTable">
+                                    <tr>
+                                        <td>User Name</td>
+                                        <td>Last Login Time</td>
+                                        <td>Posts</td>
+                                        <td>Type</td>
+                                    </tr>
+                                </thread>
+
                                 <script>
                                     async function getAllUsers() {
-                                      const api_url = '/api/getAllUsers'
-                                      const response = await fetch(api_url);
-                                      const data = await response.json();
-                                      const list = document.getElementById("myUsers");
-                                      let userRowBody = "";
-                                      data.forEach((item) => {
-                                        userRowBody = userRowBody + `<tr> 
+                                        const api_url = '/api/getAllUsers'
+                                        const response = await fetch(api_url);
+                                        const data = await response.json();
+                                        alert(data)
+                                        const list = document.getElementById("usersTable");
+                                        let userRowBody = "";
+                                        data.forEach((item) => {
+                                            userRowBody = userRowBody + `<tr> 
                                     <td>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="${item.username}" name="${item.username}"/>
@@ -72,27 +75,28 @@
                                     </td>
                                     <td>${item.lastLogin}</td>
                                     <td>${item.post}</td>
+                                    <td>${item.type}</td>
                                     </tr> `;
-                                      });
-                                  
-                                      document.getElementById("myUsers").innerHTML = userRowBody;
+                                        });
+
+                                        document.getElementById("myUsers").innerHTML = userRowBody;
                                     }
                                     getAllUsers();
                                 </script>
-                            <tbody class="align-middle text-center" id="myUsers">     
-                            </tbody>
-                        </table>
+                                <tbody class="align-middle text-center" id="myUsers">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
+
+
+            </div>
             </div>
 
-
-            
-        </div>
-    </div>
-
-</section>
-<%- include('footer.ejs') %>
+        </section>
+        <%- include('footer.ejs') %>
 </body>
 
 </html>
