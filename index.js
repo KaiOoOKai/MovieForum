@@ -96,18 +96,6 @@ app.get('/api/getAllUsers', (req, res) => {
   res.json(results);
 });
 
-app.delete('/deleteUser', (req, res) => {
-
-  let username = req.username;
-  let result = userData.filter(function (n) {
-    return (n.username == username)
-  });
-  console.log(result);
-  res.redirect('/admin');
-  
-});
-
-
 //search
 app.get('/search', (req, res) => {
   res.render('search', { keyword: req.query.keyword });
@@ -132,6 +120,7 @@ app.get('/api/getAllMovies', (req, res) => {
 
 app.get('/api/getMyThreads', (req, res) => {
   let results = threadData;
+
   results = results.filter(function (item) {
     return item.username == req.session.username;
   });
@@ -199,17 +188,94 @@ app.post('/api/moderatorlogin', (req, res) => {
 });
 
 
-app.post('/api/removeUser', (req, res) => {
+app.get('/api/removeUsers', (req, res) => {
 
-  let username = req.body.username;
-  let password = req.body.password;
-  let userData = userData.filter(function (i, n) {
-    return !(n.username == username && n.password == password)
+  let users = req.query.users;
+  usersArray = users.split(',');
+  console.log(usersArray);
+  let result = userData.filter(function (n) {
+    return !(usersArray.includes(n.username))
   });
-  let json = JSON.stringify(userData);
-  fs.writeFile('user.json', json);
-  // Need to change
-  res.redirect('/');
+
+  let json = JSON.stringify(result);
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      // Need to change
+      userData = result;
+      res.redirect('/admin');
+    }
+  });
+
+});
+
+app.get('/api/promoteToAdmin', (req, res) => {
+
+  let users = req.query.users;
+  usersArray = users.split(',');
+
+  let result = [];
+  userData.forEach(element => {
+    if (usersArray.includes(element.username)) {
+      result.push({
+        "username": element.username,
+        "password": element.password,
+        "type": "admin",
+        "lastLogin": element.lastLogin,
+        "post": element.post,
+      });
+    }
+    else {
+      result.push(element);
+    }
+  });
+  console.log(result);
+  let json = JSON.stringify(result);
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      // Need to change
+      userData = result;
+      res.redirect('/admin');
+    }
+  });
+
+});
+
+app.get('/api/promoteToModerator', (req, res) => {
+
+  let users = req.query.users;
+  usersArray = users.split(',');
+
+  let result = [];
+  userData.forEach(element => {
+    if (usersArray.includes(element.username)) {
+      result.push({
+        "username": element.username,
+        "password": element.password,
+        "type": "moderator",
+        "lastLogin": element.lastLogin,
+        "post": element.post,
+      });
+    }
+    else {
+      result.push(element);
+    }
+  });
+  console.log(result);
+  let json = JSON.stringify(result);
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      // Need to change
+      userData = result;
+      res.redirect('/admin');
+    }
+  });
+
 });
 
 app.post('/api/signup', (req, res) => {
@@ -229,6 +295,7 @@ app.post('/api/signup', (req, res) => {
     if (err)
       console.log(err);
     else {
+
       res.redirect('/home');
     }
   });
