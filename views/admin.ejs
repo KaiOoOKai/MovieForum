@@ -13,127 +13,48 @@
 
 <body class="d-flex flex-column min-vh-100">
   <%- include('navbar2.ejs') %>
+  <br>
+  <h1 class="text-center">Administrator</h1>
+  <br>
 
   <section class="d-flex">
         <div class="col-9 flex-grow-1 d-flex flex-column ">
-
             <div class="container mt-5 p-3">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered align-middle text-center">
                             <thread>
                                 <tr>
                                     <td>User Name</td>
-                                    <td>Hashed Password</td>
-                                    <td>Salt</td>
+                                    <td>Last Login Time</td>
+                                    <td>Posts</td>
                                     <td>Actions</td>
                                 </tr>
                             </thread>
-                            <tbody class="align-middle text-center">
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
+                            
+                                <script>
+                                    async function getAllUsers() {
+                                      const api_url = '/api/getAllUsers'
+                                      const response = await fetch(api_url);
+                                      const data = await response.json();
+                                      const list = document.getElementById("myUsers");
+                                      let userRowBody = "";
+                                      data.forEach((item) => {
+                                        userRowBody = userRowBody + `<tr> <td>${item.username}</td>
+                                    <td>${item.lastLogin}</td>
+                                    <td>${item.post}</td>
                                     <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Joe Doe</td>
-                                    <td>c3cd777828af93b767c80b01228925a9d173f5e16176e54b76de1ef001ee34cb</td>
-                                    <td>4242</td>
-                                    <td>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
+                                        <button class="btn btn btn-danger" type="submit" >Promote to Moderator</button>
+                                        <button class="btn btn-danger" type="submit">Promote to Admin</button>
+                                        <button class="btn btn-danger" type="submit" href="/deleteUser">Delete User</button>
+                                    </td></tr> `;
+                                      });
+                                  
+                                      document.getElementById("myUsers").innerHTML = userRowBody;
+                                    }
+                                    getAllUsers();
+                                </script>
+                            <tbody class="align-middle text-center" id="myUsers">     
                             </tbody>
                         </table>
                     </div>

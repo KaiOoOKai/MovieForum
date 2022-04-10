@@ -8,6 +8,7 @@ const { request } = require('http');
 
 const fs = require('fs');
 
+
 let threadRaw = fs.readFileSync('thread.json');
 let threadData = JSON.parse(threadRaw);
 
@@ -89,6 +90,12 @@ app.get('/thread', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
+
+app.get('/api/getAllUsers', (req, res) => {
+  let results = userData;
+  res.json(results);
+});
+
 
 
 //search
