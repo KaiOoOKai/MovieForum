@@ -17,22 +17,14 @@
     const list = document.getElementById("myList");
     let movieRowBody = "";
     data.forEach((item) => {
-      movieRowBody = movieRowBody + `<div class="card">
-          <div class="card-body">
-              <h5 class="card-title"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
-              <ul class="list-group list-group-flush">
-                                              <li class="list-group-item">
-                                                  Time: ${item.threadTime}
-                                              </li>
-                                              <li class="list-group-item">
-                                                  User: ${item.username}
-                                              </li>
-                                              <li class="list-group-item">
-                                                  Content: ${item.threadContent}
-                                              </li>
-                                          </ul>
-          </div>
-          </div>`;
+      movieRowBody = movieRowBody + `<tr> 
+        <td>
+          <h5 class="card-title"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
+        </td>
+        <td>Time: ${item.threadTime}</td>
+        <td>User: ${item.username}</td>
+        <td>Content: ${item.threadContent}</td>
+      </tr>`;
     });
 
     document.getElementById("myList").innerHTML = movieRowBody;
@@ -62,9 +54,28 @@
     <br>
     <h1>Home Page</h1>
     <br>
-    <p>Welcome Back! Here are some popular threads to view right now:</p>
+    <h3 class="text-center">Welcome! Here are some popular threads to view right now</h3>
 
-    <div id="myList"></div>
+    <section class="d-flex">
+      <div class="col-9 flex-grow-1 d-flex flex-column ">
+          <div class="container mt-5 p-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table table-bordered align-middle text-center">
+
+                      <thread id="usersTable">
+                          <tr>
+                            <h3 class="bg-dark text-center text-light">Recently Popular Threads</h5>
+                          </tr>
+                      </thread>
+                      <tbody class="align-middle text-center" id="myList">
+                      </tbody>
+                  </table>
+                
+              </div> 
+          </div>
+      </div>       
+    </section>
 
     <%- include('footer.ejs') %>
 </body>

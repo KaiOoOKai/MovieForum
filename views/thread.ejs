@@ -14,7 +14,7 @@
 
 <style>
   .comment-card {
-    background-color: rgb(245, 146, 146);
+    background-color: gray;
     border-radius: 3px;
     border: 2px solid gray;
     padding-bottom: 3px;
@@ -115,7 +115,7 @@
 
   .add-tag {
     font-style: italic;
-    background-color: rgb(227, 115, 222);
+    background-color: gray;
   }
 
   h1,
@@ -210,17 +210,17 @@
 
             </div>
             <% if(loggedin==true) { %>
-              <input type="button" value="Subscribe to this thread"
+              <input type="button" class="mb-4 btn btn-secondary mx-auto d-flex justify-content-around"value="Subscribe to this thread"
                 onclick="subscribe(`${'<%= threadTitle %>'}`)"></input>
               <% } %>
-                <div class="mainContainer">
+                <div class="container">
                   <div class="commentsContainer" id="commentsContainer">
 
                   </div>
                   <% if(loggedin==true) { %>
                     <div class="comment-card">
                       <form action="/api/addPost" method="post">
-                        <input type="hidden" name="threadTitle" value="" />
+                        <input class="text-light" type="hidden" name="threadTitle" value="" />
                         Add a new post:<textarea rows="4" cols="50" name="post">Enter text here...</textarea>
                         <input type="submit">
                       </form>

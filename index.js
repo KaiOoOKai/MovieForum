@@ -296,7 +296,7 @@ app.post('/api/signup', (req, res) => {
       console.log(err);
     else {
 
-      res.redirect('/home');
+      res.redirect('/index');
     }
   });
 });

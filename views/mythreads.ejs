@@ -18,22 +18,27 @@
     const list = document.getElementById("myList");
     let movieRowBody = "";
     data.forEach((item) => {
-      movieRowBody = movieRowBody + `<div class="card">
+      movieRowBody = movieRowBody + `<div class="card" style="width: 40rem;">
           <div class="card-body">
-              <h5 class="card-title"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
+              <h5 class="card-title mx-auto d-flex justify-content-around"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
               <ul class="list-group list-group-flush">
-                                              <li class="list-group-item">
+                                              <li class="list-group-item mx-auto d-flex justify-content-around">
                                                   Time: ${item.threadTime}
                                               </li>
-                                              <li class="list-group-item">
+                                              <li class="list-group-itemmx-auto d-flex justify-content-around">
                                                   User: ${item.username}
                                               </li>
-                                              <li class="list-group-item">
+                                              <li class="list-group-itemmx-auto d-flex justify-content-around">
                                                   Content: ${item.threadContent}
                                               </li>
                                           </ul>
           </div>
-          </div>`;
+          <br>
+          <div>
+            <button class="delete btn btn-secondary mx-auto d-flex justify-content-around">Unsubscribe</button>
+          </div>
+          <br>
+        </div>`;
     });
 
     document.getElementById("myList").innerHTML = movieRowBody;
@@ -60,13 +65,6 @@
     text-align: center;
   }
 
-  button {
-    background: #0F2027;
-    color: white;
-    font: inherit;
-    text-align: center;
-  }
-
   .card-title a:link {
     text-decoration: none;
     color: #0F2027;
@@ -77,24 +75,26 @@
   }
 </style>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <%- include('navbar2.ejs') %>
 
     <br>
     <h1>My Threads</h1>
     <br>
-
-    <p>Here are the threads that you have created:</p>
+    <h3 class="text-center">Here are the threads that you have created</h3>
     <br>
-
-    <div id="myList"></div>
-
-    <br>
-    <br>
-
     <div id="centre">
-      <button onclick="window.location.href='/addthread'">Create New Thread</button>
+      <button class="btn btn-secondary mx-auto d-flex justify-content-around" onclick="window.location.href='/addthread'">Create New Thread</button>
     </div>
+
+    <div class="container mt-4 mx-auto d-flex justify-content-around">
+      <div id="myList"></div>
+    </div>
+
+    <br>
+    <br>
+
+    
 
 
     <script>
