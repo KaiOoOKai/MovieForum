@@ -108,9 +108,7 @@ app.get('/api/movies', (req, res) => {
     return item.threadTitle.toLowerCase().includes(keyword.toLowerCase())
   })
 
-
   res.json(results);
-
 });
 
 app.get('/api/getAllMovies', (req, res) => {
@@ -348,22 +346,27 @@ app.post('/api/addPost', (req, res) => {
 
   let post = req.body.post;
   let threadTitle = req.body.threadTitle;
-
-  const result = threadData.map(element => {
+  let result = [];
+  threadData.forEach(element => {
     if (element.threadTitle == threadTitle) {
+      var newElement = element
       var currentdate = new Date();
       var datetime =
         + (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + "/"
         + currentdate.getFullYear() + " "
         + ((currentdate.getHours() < 10) ? "0" : "") + currentdate.getHours() + ":" + ((currentdate.getMinutes() < 10) ? "0" : "") + currentdate.getMinutes()
-      element.posts.push({
+      newElement.posts.push({
         "postUser": req.session.username,
         "postContent": post,
         "postTime": datetime
       })
+      result.push(newElement);
     }
-  })
+    else {
+      result.push(element);
+    }
+  });
 
   console.log(result)
 
@@ -373,6 +376,7 @@ app.post('/api/addPost', (req, res) => {
     if (err)
       console.log(err);
     else {
+      threadData = result
       res.redirect('/thread?threadTitle=' + threadTitle);
     }
   });
