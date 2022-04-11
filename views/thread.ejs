@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-  <%- include('navbar2.ejs') %>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thread Page</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Thread Page</title>
 </head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -188,29 +187,36 @@
 
 
 <body class="d-flex flex-column min-vh-100">
-  <br>
-  <h1>Thread Page</h1>
-  <br>
-  <div class="comment-title">
-    <%= threadTitle %>
-      <p>
-        <%= threadContent %>
-      </p>
-  </div>
-  <div class="mainContainer">
-    <div class="commentsContainer" id="commentsContainer">
+  <% if(loggedin==true) { %>
+    <%- include('navbar2.ejs') %>
+      <% } else { %>
+        <%- include('navbar.ejs') %>
+          <% } %>
+            <br>
+            <h1>Thread Page</h1>
+            <br>
+            <div class="comment-title">
+              <%= threadTitle %>
+                <p>
+                  <%= threadContent %>
+                </p>
+            </div>
+            <div class="mainContainer">
+              <div class="commentsContainer" id="commentsContainer">
 
-    </div>
+              </div>
+              <% if(loggedin==true) { %>
+                <div class="comment-card">
+                  <form action="/api/addPost" method="post">
+                    <input type="hidden" name="threadTitle" value="" />
+                    Add a new post:<textarea rows="4" cols="50" name="post">Enter text here...</textarea>
+                    <input type="submit">
+                  </form>
+                  <br>
+                </div>
+                <% } %>
+            </div>
 
-    <div class="comment-card">
-      <form action="/api/addPost" method="post">
-        <input type="hidden" name="threadTitle" value="" />
-        Add a new post:<textarea rows="4" cols="50" name="post">Enter text here...</textarea>
-        <input type="submit">
-      </form>
-      <br>
-    </div>
-  </div>
 </body>
 
 </html>

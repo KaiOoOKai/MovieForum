@@ -80,9 +80,11 @@ app.get('/thread', (req, res) => {
   const threadTitle = req.query.threadTitle;
   let results = threadData;
   results = results.filter(function (item) {
-    return item.username == req.session.username;
+    return item.threadTitle.includes(threadTitle);
   });
-  res.render('thread', { threadTitle: results[0].threadTitle, threadContent: results[0].postContent });
+
+  console.log(req.session.loggedin)
+  res.render('thread', { threadTitle: results[0].threadTitle, threadContent: results[0].postContent, loggedin: req.session.loggedin });
 });
 
 
