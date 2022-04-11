@@ -4,32 +4,33 @@
         "password": "1234",
         "type": "admin",
         "lastLogin": "9/4/2022 7:00PM",
-        "post": "1"
+        "post": "1",
+        "subsciptions": []
     },
     {
         "username": "moderator",
         "password": "1234",
         "type": "moderator",
         "lastLogin": "9/4/2022 7:00PM",
-        "post": "1"
+        "post": "1",
+        "subsciptions": []
     },
     {
         "username": "user",
         "password": "1234",
         "type": "user",
         "lastLogin": "9/4/2022 7:00PM",
-        "post": "1"
+        "post": "1",
+        "subsciptions": [
+            "Morbius review"
+        ]
     },
     {
         "username": "josh",
         "password": "1234",
         "type": "moderator",
         "lastLogin": "9/4/2022 7:00PM",
-        "post": "1"
-    },
-    {
-        "username": "",
-        "password": "11",
-        "type": "user"
+        "post": "1",
+        "subsciptions": []
     }
 ]
