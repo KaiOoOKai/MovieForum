@@ -187,10 +187,20 @@
   async function subscribe() {
     var threadTitle = document.getElementsByName('threadTitle')[0].value;
     const api_url = '/api/subscribe?threadTitle=' + threadTitle;
-    alert(api_url)
     const response = await fetch(api_url);
     const data = await response.json();
+    window.location.href = data
   }
+
+  async function unsubscribe() {
+    var threadTitle = document.getElementsByName('threadTitle')[0].value;
+    const api_url = '/api/unsubscribe?threadTitle=' + threadTitle;
+    const response = await fetch(api_url);
+    const data = await response.json();
+    window.location.href = data
+  }
+
+
 </script>
 
 
@@ -210,25 +220,28 @@
                 </p>
 
             </div>
-            <% if(loggedin==true) { %>
-              <input type="button" class="mb-4 btn btn-secondary mx-auto d-flex justify-content-around"value="Subscribe to this thread"
-                onclick="subscribe(`${'<%= threadTitle %>'}`)"></input>
-              <% } %>
-                <div class="container">
-                  <div class="commentsContainer" id="commentsContainer">
+            <% if(loggedin==true && subscribeStatus==false) { %>
+              <input type="button" class="mb-4 btn btn-secondary mx-auto d-flex justify-content-around"
+                value="Subscribe to this thread" onclick="subscribe(`${'<%= threadTitle %>'}`)"></input>
+              <% } else if(loggedin==true && subscribeStatus==true) { %>
+                <input type="button" class="mb-4 btn btn-secondary mx-auto d-flex justify-content-around"
+                  value="Unsubscribe to this thread" onclick="unsubscribe(`${'<%= threadTitle %>'}`)"></input>
+                <% } %>
+                  <div class="container">
+                    <div class="commentsContainer" id="commentsContainer">
 
-                  </div>
-                  <% if(loggedin==true) { %>
-                    <div class="comment-card">
-                      <form action="/api/addPost" method="post">
-                        <input class="text-light" type="hidden" name="threadTitle" value="" />
-                        Add a new post:<textarea rows="4" cols="50" name="post">Enter text here...</textarea>
-                        <input type="submit">
-                      </form>
-                      <br>
                     </div>
-                    <% } %>
-                </div>
+                    <% if(loggedin==true) { %>
+                      <div class="comment-card">
+                        <form action="/api/addPost" method="post">
+                          <input class="text-light" type="hidden" name="threadTitle" value="" />
+                          Add a new post:<textarea rows="4" cols="50" name="post">Enter text here...</textarea>
+                          <input type="submit">
+                        </form>
+                        <br>
+                      </div>
+                      <% } %>
+                  </div>
 
 </body>
 

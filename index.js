@@ -83,8 +83,16 @@ app.get('/thread', (req, res) => {
     return item.threadTitle.includes(threadTitle);
   });
 
-  console.log(req.session.loggedin)
-  res.render('thread', { threadTitle: results[0].threadTitle, threadContent: results[0].postContent, loggedin: req.session.loggedin });
+  var subscribeStatus = false;
+  if (req.session.loggedin) {
+
+    var thisUser = userData.filter(element => { return element.username == req.session.username })[0];
+    console.log('aaa' + thisUser.subsciptions.includes(threadTitle))
+    subscribeStatus = thisUser.subsciptions.includes(threadTitle);
+  }
+
+  console.log(subscribeStatus)
+  res.render('thread', { threadTitle: results[0].threadTitle, threadContent: results[0].postContent, loggedin: req.session.loggedin, subscribeStatus: subscribeStatus });
 });
 
 
@@ -285,7 +293,10 @@ app.post('/api/signup', (req, res) => {
   let newUser = {
     "username": username,
     "password": password,
-    "type": "user"
+    "type": "user",
+    "lastLogin": "9/4/2022 7:00PM",
+    "post": "1",
+    "subsciptions": []
   }
 
   userData.push(newUser);
@@ -359,12 +370,65 @@ app.get('/api/subscribe', (req, res) => {
       console.log(err);
     else {
       userData = result
-      res.redirect('/thread?threadTitle=' + title.split(' ')[0]);
+      res.json('/thread?threadTitle=' + title);
     }
   });
 
 });
 
+app.get('/api/unsubscribe', (req, res) => {
+
+  let title = req.query.threadTitle;
+  let user = req.session.username;
+  let result = [];
+  userData.forEach(element => {
+    if (element.username == user) {
+      var newElement = element;
+      var index = newElement.subsciptions.indexOf(title);    // <-- Not supported in <IE9
+      if (index !== -1) {
+        newElement.subsciptions.splice(index, 1);
+      }
+      result.push(newElement);
+    }
+    else {
+      result.push(element);
+    }
+
+  });
+  console.log(result)
+
+  let json = JSON.stringify(result);
+  console.log(json)
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      userData = result
+      res.json('/thread?threadTitle=' + title);
+    }
+  });
+
+});
+
+app.get('/api/getmysubscribe', (req, res) => {
+
+  let user = req.session.username;
+  let result = [];
+  result = userData.filter(element => {
+    return element.username == user
+  });
+  let result2 = []
+
+  threadData.forEach(element => {
+    if (result[0].subsciptions.includes(element.threadTitle)) {
+      result2.push(element);
+    }
+  });
+
+  console.log('bbb' + result[0].subsciptions + 'ccc' + result2)
+  res.json(result2)
+
+});
 
 app.get('/api/getPosts', (req, res) => {
 

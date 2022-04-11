@@ -12,7 +12,7 @@
 
 <script>
   async function getAllMovies() {
-    const api_url = '/api/getAllMovies'
+    const api_url = '/api/getmysubscribe'
     const response = await fetch(api_url);
     const data = await response.json();
     const list = document.getElementById("myList");
@@ -21,7 +21,7 @@
       movieRowBody = movieRowBody + `
       <tr> 
         <td>
-          <h5 class="card-title mx-auto d-flex justify-content-around"><a href=/thread?threadTitle=${item.threadTitle}>${item.threadTitle}</a></h5>
+          <h5 class="card-title mx-auto d-flex justify-content-around"><a href=/thread?threadTitle=${encodeURIComponent(item.threadTitle)}>${item.threadTitle}</a></h5>
         </td>
         <td>Time: ${item.threadTime}</td>
         <td>User: ${item.username}</td>
@@ -70,25 +70,25 @@
     <br>
     <section class="d-flex">
       <div class="col-9 flex-grow-1 d-flex flex-column ">
-          <div class="container mt-5 p-3">
-              <div class="row">
-                <div class="col-md-12">
-                  <table class="table table-bordered align-middle text-center">
+        <div class="container mt-5 p-3">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-bordered align-middle text-center">
 
-                      <thread id="usersTable">
-                          <tr>
-                            <h3 class="bg-dark text-center text-light">My Subscribed</h5>
-                          </tr>
-                      </thread>
-                      <tbody class="align-middle text-center" id="myList">
-                      </tbody>
-                  </table>
-                
-              </div> 
+                <thread id="usersTable">
+                  <tr>
+                    <h3 class="bg-dark text-center text-light">My Subscriptions</h5>
+                  </tr>
+                </thread>
+                <tbody class="align-middle text-center" id="myList">
+                </tbody>
+              </table>
+
+            </div>
           </div>
-      </div>       
+        </div>
     </section>
-    
+
 
     <script>
 
