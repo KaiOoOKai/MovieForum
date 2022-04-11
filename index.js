@@ -330,6 +330,7 @@ app.post('/api/addthread', (req, res) => {
     "username": req.session.username,
     "threadContent": description,
     "tags": tags,
+    "posts": []
   }
 
   threadData.push(newThread);
@@ -444,6 +445,7 @@ app.post('/api/addPost', (req, res) => {
 
   let post = req.body.post;
   let threadTitle = req.body.threadTitle;
+  console.log('aaa2s' + threadTitle)
   let result = [];
   threadData.forEach(element => {
     if (element.threadTitle == threadTitle) {
@@ -467,7 +469,7 @@ app.post('/api/addPost', (req, res) => {
   });
 
   let json = JSON.stringify(result);
-  console.log(json)
+  console.log('ggg' + json)
   fs.writeFile("thread.json", json, (err) => {
     if (err)
       console.log(err);
