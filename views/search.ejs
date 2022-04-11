@@ -30,36 +30,57 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <h1>Forum search results related to "<%= keyword %>"</h1>
 
     <!--<ul= id="myList"></ul>-->
     <div class="container-fluid">
         <div class="row" id="movieRow">
         </div>
         <style>
-            .card {
-                margin-top: 10px;
-                margin-left: 10px;
-                margin-bottom: 10px;
-                margin-right: 10px;
-                max-height: 300px;
-                min-height: 200px;
-                transition: .1s;
+            h1,
+            p {
+                text-align: center;
             }
 
-            .card-img-top {
-                width: 100%;
-                height: 100em;
-                object-fit: contain;
+            .threads {
+                text-align: center;
+                list-style-type: none;
             }
 
-            .card:hover {
-                box-shadow: 2px 2px 2px grey;
-                transform: scale(1.05);
+            .links {
+                color: black;
+            }
+
+            .card-title a:link {
+                text-decoration: none;
+                color: #0F2027;
+            }
+
+            .card-title a:hover {
+                text-decoration: underline;
             }
         </style>
     </div>
-    <div id="message"></div>
+    <section class="d-flex">
+        <div class="col-9 flex-grow-1 d-flex flex-column ">
+            <div class="container mt-5 p-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered align-middle text-center">
+
+                            <thread id="usersTable">
+                                <tr>
+                                    <h3 class="bg-dark text-center text-light">Forum search results related to "<%=
+                                            keyword %>"</h5>
+                                </tr>
+                            </thread>
+                            <tbody class="align-middle text-center" id="myList">
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+    </section>
 
     <script>
         async function getAllMovies() {
@@ -69,22 +90,14 @@
             const list = document.getElementById("myList");
             let movieRowBody = "";
             data.forEach((item) => {
-                movieRowBody = movieRowBody + `<div class="card">
-          <div class="card-body">
-              <h5 class="card-title"><a href=/thread?threadTitle=${encodeURIComponent(item.threadTitle)}>${item.threadTitle}</a></h5>
-              <ul class="list-group list-group-flush">
-                                              <li class="list-group-item">
-                                                  Time: ${item.threadTime}
-                                              </li>
-                                              <li class="list-group-item">
-                                                  User: ${item.username}
-                                              </li>
-                                              <li class="list-group-item">
-                                                  Content: ${item.threadContent}
-                                              </li>
-                                          </ul>
-          </div>
-          </div>`;
+                movieRowBody = movieRowBody + `<tr> 
+        <td>
+          <h5 class="card-title"><a href=/thread?threadTitle=${encodeURIComponent(item.threadTitle)}>${item.threadTitle}</a></h5>
+        </td>
+        <td>Time: ${item.threadTime}</td>
+        <td>User: ${item.username}</td>
+        <td>Content: ${item.threadContent}</td>
+      </tr>`;;
             });
 
             document.getElementById("myList").innerHTML = movieRowBody;

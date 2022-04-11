@@ -25,59 +25,19 @@
                 "postUser": "user",
                 "postContent": "Enter text here...",
                 "postTime": "4/11/2022 00:27"
-            }
-        ]
-    },
-    {
-        "threadTitle": "1",
-        "threadTime": "4/9/2022 18:7",
-        "threadContent": "2",
-        "username": "user",
-        "tags": "3",
-        "posts": [
-            {
-                "postUser": "kai",
-                "postContent": "12312312321321",
-                "postTime": "2022-04-09 11:20pm"
             },
             {
-                "postUser": "kai",
-                "postContent": "12312312321321",
-                "postTime": "2022-04-09 11:20pm"
+                "postUser": "user",
+                "postContent": "1234",
+                "postTime": "4/11/2022 13:20"
             }
         ]
     },
     {
-        "threadTitle": "Thread Title",
-        "threadTime": "4/9/2022 18:12",
-        "threadContent": "Hello, I'm content",
-        "username": "user",
-        "tags": "1111111",
-        "posts": [
-            {
-                "postUser": "kai",
-                "postContent": "12312312321321",
-                "postTime": "2022-04-09 11:20pm"
-            },
-            {
-                "postUser": "kai",
-                "postContent": "12312312321321",
-                "postTime": "2022-04-09 11:20pm"
-            }
-        ]
-    },
-    {
-        "threadTitle": "111",
-        "threadTime": "4/9/2022 18:13",
-        "username": "user",
-        "threadContent": "222",
-        "tags": "3333"
-    },
-    {
-        "threadTitle": "Harry Potter",
-        "threadTime": "4/10/2022 16:58",
-        "username": "user",
-        "threadContent": "aasdasda",
-        "tags": "11"
+        "threadTitle": "Harry Potter and the Sorcerer's Stone",
+        "threadTime": "4/11/2022 13:06",
+        "username": "user2",
+        "threadContent": "Harry Potter and the Sorcerer's Stone is a great movie",
+        "tags": "Harry Potter"
     }
 ]
