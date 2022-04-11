@@ -82,7 +82,7 @@ app.get('/thread', (req, res) => {
   results = results.filter(function (item) {
     return item.username == req.session.username;
   });
-  res.render('thread', { threadTitle: threadTitle });
+  res.render('thread', { threadTitle: results[0].threadTitle, threadContent: results[0].postContent });
 });
 
 
@@ -341,6 +341,42 @@ app.get('/api/getPosts', (req, res) => {
   let result = threadData.filter(a => { return a.threadTitle.toLowerCase().includes(title.toLowerCase()) });
   console.log(result)
   res.json(result);
+});
+
+
+app.post('/api/addPost', (req, res) => {
+
+  let post = req.body.post;
+  let threadTitle = req.body.threadTitle;
+  console.log(threadTitle)
+  // let description = req.body.description;
+  // let tags = req.body.tags;
+  // var currentdate = new Date();
+  // console.log('aaaa' + req.session.username)
+  // var datetime =
+  //   + (currentdate.getMonth() + 1) + "/"
+  //   + currentdate.getDate() + "/"
+  //   + currentdate.getFullYear() + " "
+  //   + ((currentdate.getHours() < 10) ? "0" : "") + currentdate.getHours() + ":" + ((currentdate.getMinutes() < 10) ? "0" : "") + currentdate.getMinutes()
+
+  // let newThread = {
+  //   "threadTitle": title,
+  //   "threadTime": datetime,
+  //   "username": req.session.username,
+  //   "threadContent": description,
+  //   "tags": tags,
+  // }
+
+  // threadData.push(newThread);
+  // let json = JSON.stringify(threadData);
+  // console.log(json)
+  // fs.writeFile("thread.json", json, (err) => {
+  //   if (err)
+  //     console.log(err);
+  //   else {
+  //     res.redirect('/home');
+  //   }
+  // });
 });
 
 app.get('/index', (req, res) => {

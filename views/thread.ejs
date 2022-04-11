@@ -119,7 +119,8 @@
     background-color: rgb(227, 115, 222);
   }
 
-  h1, p {
+  h1,
+  p {
     text-align: center;
   }
 
@@ -178,6 +179,9 @@
       </div>`;
     });
     list.innerHTML = postRowBody;
+
+    var threadTitle = `${'<%= threadTitle %>'}`;
+    document.getElementsByName('threadTitle')[0].value = threadTitle;
   }
   getPosts();
 </script>
@@ -188,11 +192,23 @@
   <h1>Thread Page</h1>
   <br>
   <div class="comment-title">
-    Thread Title
+    <%= threadTitle %>
+      <p>
+        <%= threadContent %>
+      </p>
   </div>
   <div class="mainContainer">
     <div class="commentsContainer" id="commentsContainer">
 
+    </div>
+
+    <div class="comment-card">
+      <form action="/api/addPost" method="post">
+        <input type="hidden" name="threadTitle" value="" />
+        Add a new post:<textarea rows="4" cols="50" name="post">Enter text here...</textarea>
+        <input type="submit">
+      </form>
+      <br>
     </div>
   </div>
 </body>
