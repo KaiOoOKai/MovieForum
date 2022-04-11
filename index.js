@@ -307,7 +307,6 @@ app.post('/api/addthread', (req, res) => {
   let description = req.body.description;
   let tags = req.body.tags;
   var currentdate = new Date();
-  console.log('aaaa' + req.session.username)
   var datetime =
     + (currentdate.getMonth() + 1) + "/"
     + currentdate.getDate() + "/"
@@ -333,6 +332,39 @@ app.post('/api/addthread', (req, res) => {
     }
   });
 });
+
+
+app.get('/api/subscribe', (req, res) => {
+
+  let title = req.query.threadTitle;
+  let user = req.session.username;
+  let result = [];
+  userData.forEach(element => {
+    if (element.username == user) {
+      var newElement = element;
+      newElement.subsciptions.push(title);
+      result.push(newElement);
+    }
+    else {
+      result.push(element);
+    }
+
+  });
+  console.log(result)
+
+  let json = JSON.stringify(result);
+  console.log(json)
+  fs.writeFile("user.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      userData = result
+      res.redirect('/thread?threadTitle=' + title.split(' ')[0]);
+    }
+  });
+
+});
+
 
 app.get('/api/getPosts', (req, res) => {
 
@@ -369,8 +401,6 @@ app.post('/api/addPost', (req, res) => {
       result.push(element);
     }
   });
-
-  console.log(result)
 
   let json = JSON.stringify(result);
   console.log(json)
