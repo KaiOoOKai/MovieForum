@@ -348,35 +348,34 @@ app.post('/api/addPost', (req, res) => {
 
   let post = req.body.post;
   let threadTitle = req.body.threadTitle;
-  console.log(threadTitle)
-  // let description = req.body.description;
-  // let tags = req.body.tags;
-  // var currentdate = new Date();
-  // console.log('aaaa' + req.session.username)
-  // var datetime =
-  //   + (currentdate.getMonth() + 1) + "/"
-  //   + currentdate.getDate() + "/"
-  //   + currentdate.getFullYear() + " "
-  //   + ((currentdate.getHours() < 10) ? "0" : "") + currentdate.getHours() + ":" + ((currentdate.getMinutes() < 10) ? "0" : "") + currentdate.getMinutes()
 
-  // let newThread = {
-  //   "threadTitle": title,
-  //   "threadTime": datetime,
-  //   "username": req.session.username,
-  //   "threadContent": description,
-  //   "tags": tags,
-  // }
+  const result = threadData.map(element => {
+    if (element.threadTitle == threadTitle) {
+      var currentdate = new Date();
+      var datetime =
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getDate() + "/"
+        + currentdate.getFullYear() + " "
+        + ((currentdate.getHours() < 10) ? "0" : "") + currentdate.getHours() + ":" + ((currentdate.getMinutes() < 10) ? "0" : "") + currentdate.getMinutes()
+      element.posts.push({
+        "postUser": req.session.username,
+        "postContent": post,
+        "postTime": datetime
+      })
+    }
+  })
 
-  // threadData.push(newThread);
-  // let json = JSON.stringify(threadData);
-  // console.log(json)
-  // fs.writeFile("thread.json", json, (err) => {
-  //   if (err)
-  //     console.log(err);
-  //   else {
-  //     res.redirect('/home');
-  //   }
-  // });
+  console.log(result)
+
+  let json = JSON.stringify(result);
+  console.log(json)
+  fs.writeFile("thread.json", json, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      res.redirect('/thread?threadTitle=' + threadTitle);
+    }
+  });
 });
 
 app.get('/index', (req, res) => {
