@@ -5,6 +5,8 @@ Yuan Liu,
 Sidney Seewer,
 Joshua Diwa
 
+GitHub Link: https://github.com/KaiOoOKai/MovieForum
+
 ## Instructions on how to download and run this program:
 1. Ensure that node.js is installed on your system, otherwise you will not be able to run this app.
 2. Download this project by either cloning the project from GitHub, or by downloading the repository as a .zip file, and extract these files in a location of your choosing on your computer.
